@@ -1,0 +1,57 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9000/eureka/
+server:
+  port: 9700
+spring:
+  application:
+    name: service-zuul
+#hystrix的超时时间
+hystrix:
+  command:
+    serviceId:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+#ribbon的超时时间
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+zuul:
+  routes:
+    asserts:
+      path: /asserts/**
+      strip-prefix: false
+      serviceId: asserts
+    market:
+      path: /m/**
+      strip-prefix: false
+      serviceId: market
+    member:
+      path: /member/**
+      strip-prefix: false
+      serviceId: member
+    news:
+      path: /news/**
+      strip-prefix: false
+      serviceId: news
+    order:
+      path: /order/**
+      strip-prefix: false
+      serviceId: order
+    read-service:
+      path: /readservice/**
+      strip-prefix: false
+      serviceId: read-service
+    trade:
+      path: /trade/**
+      strip-prefix: false
+      serviceId: trade
+    work-order:
+      path: /workorder/**
+      strip-prefix: false
+      serviceId: work-order
+  sensitive-headers: true
+
